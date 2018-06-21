@@ -9,8 +9,7 @@
     "analyze": "source-map-explorer build/static/js/app.*",
     "precommit": "lint-staged",
     "lint-js": "eslint --ignore-path .gitignore --ignore-pattern \"!**/.*\" .",
-    "lint-css":
-      "stylelint \"src/**/*.{css,less,styl,scss,sass,sss}\" --syntax scss",
+    "lint-css": "stylelint \"src/**/*.{css,less,styl,scss,sass,sss}\" --syntax scss",
     "lint": "yarn run lint-js && yarn run lint-css",
     "fix-js": "yarn run lint-js --fix",
     "fix-css": "yarn run lint-css --fix .",
@@ -21,15 +20,17 @@
     "test-watch": "yarn run test --watch --notify",
     "test-coverage": "jest --coverage",
     "coverage": "yarn run test-cover && opn coverage/lcov-report/index.html",
-    "start":
-      "webpack-dev-server --inline --hot --config config/webpack.config.dev.js",
+    "start": "webpack-dev-server --inline --hot --config config/webpack.config.dev.js",
     "build": "rimraf ./build && webpack --config config/webpack.config.prod.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Game-X-Coin/wallet"
   },
-  "keywords": ["blockchain", "wallet"],
+  "keywords": [
+    "blockchain",
+    "wallet"
+  ],
   "author": "GXC",
   "license": "MIT",
   "bugs": {
@@ -37,8 +38,14 @@
   },
   "flow": "flow",
   "lint-staged": {
-    "*.{js,jsx,mjs}": ["eslint --no-ignore --fix", "git add --force"],
-    "*.{json,md}": ["prettier --write", "git add --force"]
+    "*.{js,jsx,mjs}": [
+      "eslint --no-ignore --fix",
+      "git add --force"
+    ],
+    "*.{json,md}": [
+      "prettier --write",
+      "git add --force"
+    ]
   },
   "pre-commit": "lint-staged",
   "devDependencies": {
@@ -121,6 +128,7 @@
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-ga": "^2.4.1",
+    "react-headroom": "^2.2.2",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "reactstrap": "^6.0.1",
