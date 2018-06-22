@@ -1,11 +1,16 @@
 import axios from 'axios';
+import commonStore from '@/stores/commonStore';
 
 const { API_ENDPOINT } = process.env;
 
-const defaultHeaders = {};
+const defaultHeaders = {
+  authorization: `Bearer ${commonStore.token}`
+};
 
 const defaultOptions = {
-  baseURL: API_ENDPOINT
+  baseURL: API_ENDPOINT,
+  responseType: 'json',
+  withCredentials: true
 };
 
 const request = options => {
