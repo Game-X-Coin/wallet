@@ -1,5 +1,9 @@
 @import '~styles/variables/all';
 
+.headroom {
+  z-index: $zindex-header !important;
+}
+
 .header {
   padding: 0.75rem 0;
   width: 100%;
