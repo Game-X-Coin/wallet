@@ -70,7 +70,9 @@ module.exports = {
       'babel-runtime': path.dirname(
         require.resolve('babel-runtime/package.json')
       ),
-      'react-native': 'react-native-web'
+      'react-native': 'react-native-web',
+      styles: path.join(__dirname, '../src/styles'),
+      '@': path.join(__dirname, '../src')
     },
     plugins: [new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])]
   },
