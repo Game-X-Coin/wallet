@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
-import { browserHistory as history } from 'react-router';
 import { hot } from 'react-hot-loader';
-import { BrowserRouter as Router, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
 
 import Routes from './Routes';
 import { Header, Body, Footer } from './components/Layout';
+import LoadingSpinner from './components/LoadingSpinner';
 
 @withRouter
-class ScrollToTop extends Component {
+@inject('userStore', 'commonStore')
+@observer
+class App extends Component {
+  componentWillMount() {
+    if (!this.props.commonStore.token) {
+      this.props.commonStore.setAppLoaded();
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.commonStore.token) {
+      this.props.userStore
+        .pullUser()
+        .finally(() => this.props.commonStore.setAppLoaded());
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.location !== this.props.location) {
       window.scrollTo(0, 0);
@@ -16,25 +33,29 @@ class ScrollToTop extends Component {
   }
 
   render() {
-    return this.props.children;
-  }
-}
+    const { commonStore } = this.props;
+    const isPopupWindow = window.opener && window.opener !== window;
 
-class App extends Component {
-  render() {
     return (
-      <Router history={history}>
-        <ScrollToTop>
-          <div id="app">
-            <Header />
-            <Body>
-              <Routes />
-            </Body>
-            <Footer />
-            {process.env.NODE_ENV !== 'production' && <DevTools />}
-          </div>
-        </ScrollToTop>
-      </Router>
+      <div id="app">
+        {commonStore.appLoaded ? (
+          isPopupWindow ? (
+            <Routes />
+          ) : (
+            <React.Fragment>
+              <Header />
+              <Body>
+                <Routes />
+              </Body>
+              <Footer />
+            </React.Fragment>
+          )
+        ) : (
+          <LoadingSpinner global />
+        )}
+
+        {process.env.NODE_ENV !== 'production' && <DevTools />}
+      </div>
     );
   }
 }
