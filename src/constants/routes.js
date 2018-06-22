@@ -9,16 +9,16 @@ export const routes = [
   {
     path: '/login',
     exact: true,
-    component: asyncComponent(() => import('../pages/Auth/LoginPage'))
+    component: asyncComponent(() => import('../pages/LoginPage'))
   },
   {
     path: '/register',
     exact: true,
-    component: asyncComponent(() => import('../pages/Auth/RegisterPage'))
+    component: asyncComponent(() => import('../pages/RegisterPage'))
   },
   {
     path: '/authorize',
     exact: true,
-    component: asyncComponent(() => import('../pages/Auth/AuthorizePage'))
+    component: asyncComponent(() => import('../pages/AuthorizePage'))
   }
 ];
