@@ -1,6 +1,6 @@
 import React from 'react';
 
-import logo from '@/media/images/logo/logo.svg';
+import logo from '@/media/images/logo/logo_only.svg';
 import './style.scss';
 
 const LogoBox = () => {
