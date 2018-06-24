@@ -1,0 +1,17 @@
+.authorize-page {
+  .game {
+    display: flex;
+
+    .logo {
+      margin-right: 1rem;
+      width: 5.5rem;
+      border-radius: 5px;
+      background-color: lightgray;
+      background-size: cover;
+    }
+
+    .description {
+      flex: 1;
+    }
+  }
+}

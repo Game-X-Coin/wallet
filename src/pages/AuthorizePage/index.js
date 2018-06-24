@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
 import { observable } from 'mobx';
-import { inject, observer } from 'mobx-react';
+import { inject, observer, action } from 'mobx-react';
+import { Form, Input, Button } from 'reactstrap';
 import qs from 'query-string';
-import { Form, Input, Button, Alert } from 'reactstrap';
 
-import LogoBox from '@/components/LogoBox';
 import { oauthAPI } from '@/services/api';
+
+import { games } from '@/constants/dgame';
+
+import { Fullscreen } from '@/components/Layout';
+import LogoBox from '@/components/LogoBox';
+
+import './style.scss';
 
 const { API_ROOT } = process.env;
 
 @inject('authStore', 'userStore', 'commonStore')
 @observer
 class AuthorizePage extends Component {
+  @observable loading = true;
   @observable transactionId = '';
+  @observable client = '';
 
-  componentWillMount() {
+  async componentWillMount() {
     const { authStore, userStore } = this.props;
     const { pathname, search } = window.location;
     const params = qs.parse(search);
@@ -26,35 +34,54 @@ class AuthorizePage extends Component {
 
       this.props.history.push('/register');
     } else {
-      oauthAPI.getTransaction(params).then(res => {
-        this.transactionId = res.transactionId;
+      const { transactionId, client } = await oauthAPI.getTransaction(params);
+
+      action(() => {
+        this.transactionId = transactionId;
+        this.client = client.name;
+        this.loading = false;
       });
     }
   }
 
   render() {
     const { currentUser } = this.props.userStore;
-    const { token } = this.props.commonStore;
+    const { token: jwt } = this.props.commonStore;
+
+    const game = this.client && games[this.client];
 
     return (
-      <div>
+      <Fullscreen className="authorize-page">
         <LogoBox />
-        <Alert color="primary">
-          Welcome back! {currentUser && `'${currentUser.account}'`}
-        </Alert>
+        <h3 className="mb-4 text-center">Login with GXC</h3>
 
-        <Form method="post" action={`${API_ROOT}/oauth/authorize`}>
-          <Input
-            type="hidden"
-            name="transaction_id"
-            value={this.transactionId}
-          />
-          <Input type="hidden" name="jwt" value={token} />
-          <Button color="primary" type="submit" block>
-            GXC Login
-          </Button>
-        </Form>
-      </div>
+        <div className="size-sm">
+          <div className="game position-relative mb-3">
+            <div
+              className="logo"
+              style={{ backgroundImage: `url(${game && game.logo})` }}
+            />
+            <div className="description">
+              <a target="_blank" href={game && game.url}>
+                {game ? game.name : 'dgame'}
+              </a>
+              <p>wants to access your account</p>
+            </div>
+          </div>
+
+          <Form method="post" action={`${API_ROOT}/oauth/authorize`}>
+            <Input
+              type="hidden"
+              name="transaction_id"
+              value={this.transactionId}
+            />
+            <Input type="hidden" name="jwt" value={jwt} />
+            <Button color="primary" type="submit" disabled={this.loading} block>
+              Continue as {currentUser && currentUser.account}
+            </Button>
+          </Form>
+        </div>
+      </Fullscreen>
     );
   }
 }
