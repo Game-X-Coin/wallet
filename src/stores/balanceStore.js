@@ -4,11 +4,8 @@ import { eosAPI } from '@/services/api';
 export class BalanceStore {
   @observable isLoading = false;
   @observable
-  data = {
-    GXQ: '0',
-    BLS: '0.000',
-    SPN: '0.000',
-    ACA: '0.000'
+  balances = {
+    GXQ: '0.0000'
   };
 
   $req(account) {
@@ -22,7 +19,10 @@ export class BalanceStore {
     return this.$req(account)
       .then(
         action(({ balances }) => {
-          this.data = { ...this.data, ...balances };
+          this.balances = {
+            ...this.balances,
+            ...balances
+          };
         })
       )
       .finally(
