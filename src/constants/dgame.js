@@ -18,8 +18,8 @@ const gameInfo = {
     url: 'http://gxcquest.com',
     logo: getImage('game/gxcquest.png'),
     description: 'The first game running on the GXC blockchain',
-    howto: 'Kill monsters to earn GXC',
-    tokens: [tokenInfo.GXQ, tokenInfo.GXQ]
+    howto: 'Kill monsters',
+    tokens: [tokenInfo.GXQ]
   }
 };
 
