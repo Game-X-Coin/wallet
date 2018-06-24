@@ -12,6 +12,11 @@ export const routes = [
     component: asyncComponent(() => import('../pages/DgamePage'))
   },
   {
+    path: '/profile',
+    exact: true,
+    component: asyncComponent(() => import('../pages/ProfilePage'))
+  },
+  {
     path: '/login',
     exact: true,
     isFullscreen: true,
