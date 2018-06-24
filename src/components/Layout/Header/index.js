@@ -4,7 +4,11 @@ import {
   Nav,
   NavbarBrand,
   NavItem as BootstrapNavItem,
-  NavLink as BootstrapNavLink
+  NavLink as BootstrapNavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap';
 import { Link, NavLink } from 'react-router-dom';
 import Headroom from 'react-headroom';
@@ -37,8 +41,20 @@ class Header extends Component {
           </NavItem>
         ))}
         <Auth
-          renderLoggedIn={user => (
-            <NavItem to="/">Welcome {user.account}!</NavItem>
+          renderLoggedIn={(user, logout) => (
+            <UncontrolledDropdown nav inNavbar>
+              <DropdownToggle nav>Welcome {user.account}!</DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem tag={Link} to="/">
+                  Balance
+                </DropdownItem>
+                <DropdownItem tag={Link} to="/profile">
+                  Profile
+                </DropdownItem>
+                <DropdownItem divider />
+                <DropdownItem onClick={logout}>Logout</DropdownItem>
+              </DropdownMenu>
+            </UncontrolledDropdown>
           )}
         />
       </Nav>
