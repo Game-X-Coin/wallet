@@ -1,10 +1,12 @@
 @import 'variables/all';
 @import 'base/all';
 @import 'bootstrap/all'; // customize bootstrap
+@import 'customize/all';
 
 #app {
   display: flex;
   flex-direction: column;
 
   min-height: 100vh;
+  overflow-x: hidden;
 }

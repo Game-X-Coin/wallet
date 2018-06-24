@@ -1,0 +1,8 @@
+@import '~styles/variables/all';
+
+.size-sm {
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+  max-width: $size-sm;
+}
