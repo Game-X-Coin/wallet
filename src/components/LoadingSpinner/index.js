@@ -5,11 +5,29 @@ import classNames from 'classnames';
 import './style.scss';
 
 const LoadingSpinner = props => {
-  const Element = p => (
-    <div className={classNames('loading-spinner', p.className)}>
-      <div className="circle" />
+  const circleSize = 6;
+  const circleWidth = 3;
+  const logoSize = 4;
 
-      <svg className="logo" viewBox="0 0 164 133">
+  const Element = ({ className, scale = 1 }) => (
+    <div className={classNames('loading-spinner', className)}>
+      <div
+        className="loading-spinner__circle"
+        style={{
+          width: `${circleSize * scale}rem`,
+          height: `${circleSize * scale}rem`,
+          borderTopWidth: `${circleWidth * scale}px`
+        }}
+      />
+
+      <svg
+        className="loading-spinner__logo"
+        viewBox="0 0 164 133"
+        style={{
+          width: `${logoSize * scale}rem`,
+          height: `${logoSize * scale}rem`
+        }}
+      >
         <polygon fill="#FFD111" points="41,123 82,82 0,82 " />
         <rect
           x="53.009"
@@ -39,7 +57,7 @@ const LoadingSpinner = props => {
     );
   }
 
-  return <Element />;
+  return <Element {...props} />;
 };
 
 export default LoadingSpinner;
