@@ -10,10 +10,7 @@ class AuthStore {
   @observable errors = undefined;
   @observable redirectParams = {};
   @observable
-  values = {
-    account: '',
-    email: '',
-    password: '',
+  temp = {
     keys: {
       owner: { private: null, public: null },
       active: { private: null, public: null }
@@ -23,41 +20,21 @@ class AuthStore {
   };
 
   @action
-  setAccount(account) {
-    this.values.account = account;
-  }
-
-  @action
-  setEmail(email) {
-    this.values.email = email;
-  }
-
-  @action
-  setPassword(password) {
-    this.values.password = password;
-  }
-
-  @action
   setTempValues(keys, ownerWalletPassword, activeWalletPassword) {
-    this.values.keys = keys;
-    this.values.ownerWalletPassword = ownerWalletPassword;
-    this.values.activeWalletPassword = activeWalletPassword;
+    this.temp = {
+      keys,
+      ownerWalletPassword,
+      activeWalletPassword
+    };
   }
 
   @action
-  reset() {
-    this.values.account = '';
-    this.values.email = '';
-    this.values.password = '';
-  }
-
-  @action
-  login() {
+  login({ email, password }) {
     this.inProgress = true;
     this.errors = undefined;
 
     return authAPI
-      .login(this.values.email, this.values.password)
+      .login({ email, password })
       .then(({ token }) => commonStore.setToken(token.accessToken))
       .then(() => userStore.pullUser())
       .finally(
@@ -76,14 +53,14 @@ class AuthStore {
   }
 
   @action
-  register() {
+  register({ email, account, password }) {
     this.inProgress = true;
 
     return authAPI
       .register({
-        account: this.values.account,
-        email: this.values.email,
-        password: this.values.password
+        email,
+        account,
+        password
       })
       .then(({ token, keys, ownerWalletPassword, activeWalletPassword }) => {
         commonStore.setToken(token.accessToken);

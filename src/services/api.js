@@ -4,8 +4,7 @@ export const authAPI = {
   current: () => {
     return request({ url: '/users/profile' });
   },
-  login: (email, password) =>
-    request({ url: '/auth/login', method: 'post', data: { email, password } }),
+  login: data => request({ url: '/auth/login', method: 'post', data }),
   register: data => request({ url: '/auth/register', method: 'post', data }),
   save: user => request({ url: '/user', method: 'put', data: { user } })
 };
