@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
-import { withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
 
-import Routes from './Routes';
+import { routes } from './constants';
 import { Header, Body, Footer } from './components/Layout';
 import LoadingSpinner from './components/LoadingSpinner';
 
@@ -34,26 +34,38 @@ class App extends Component {
 
   render() {
     const { commonStore } = this.props;
-    const isPopupWindow = window.opener && window.opener !== window;
+
+    const Routes = () =>
+      routes.map((route, index) => (
+        <Route
+          key={index}
+          exact={route.exact}
+          path={route.path}
+          render={() =>
+            route.isFullscreen ? (
+              <route.component />
+            ) : (
+              <React.Fragment>
+                <Header />
+                <Body>
+                  <route.component />
+                </Body>
+                <Footer />
+              </React.Fragment>
+            )
+          }
+        />
+      ));
 
     return (
       <div id="app">
         {commonStore.appLoaded ? (
-          isPopupWindow ? (
+          <Switch>
             <Routes />
-          ) : (
-            <React.Fragment>
-              <Header />
-              <Body>
-                <Routes />
-              </Body>
-              <Footer />
-            </React.Fragment>
-          )
+          </Switch>
         ) : (
           <LoadingSpinner global />
         )}
-
         {process.env.NODE_ENV !== 'production' && <DevTools />}
       </div>
     );
