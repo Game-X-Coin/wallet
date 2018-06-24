@@ -1,40 +1,60 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, NavbarBrand, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import {
+  Navbar,
+  Nav,
+  NavbarBrand,
+  NavItem as BootstrapNavItem,
+  NavLink as BootstrapNavLink
+} from 'reactstrap';
+import { Link, NavLink } from 'react-router-dom';
 import Headroom from 'react-headroom';
 
-import logo from '../../../media/images/logo/logo.svg';
+import logo from '@/media/images/logo/logo.svg';
+import Auth from '@/views/Auth';
+
 import './style.scss';
 
 class Header extends Component {
-  renderLinks(links) {
-    return links.map(link => (
-      <NavItem className="px-3" key={link.to}>
-        <NavLink tag={Link} to={link.to}>
-          {link.name}
-        </NavLink>
-      </NavItem>
-    ));
-  }
-
   render() {
     const links = [
       { name: 'dGame', to: '/dgame' },
-      { name: 'DEX', to: '/dex' },
-      { name: 'Login', to: '/login' }
+      { name: 'DEX', to: '/dex' }
     ];
 
+    const NavItem = props => (
+      <BootstrapNavItem className="px-3">
+        <BootstrapNavLink tag={NavLink} to={props.to}>
+          {props.children}
+        </BootstrapNavLink>
+      </BootstrapNavItem>
+    );
+
+    const NavItems = () => (
+      <Nav navbar>
+        {links.map(link => (
+          <NavItem key={link.to} to={link.to}>
+            {link.name}
+          </NavItem>
+        ))}
+        <Auth
+          renderLoggedIn={user => (
+            <NavItem to="/">Welcome {user.account}!</NavItem>
+          )}
+        />
+      </Nav>
+    );
+
     return (
-      <Headroom>
-        <header className="header">
+      <header className="header">
+        <Headroom>
           <Navbar className="container" expand light>
             <NavbarBrand tag={Link} to="/">
               <img className="logo" src={logo} alt="logo" />
             </NavbarBrand>
-            <Nav navbar>{this.renderLinks(links)}</Nav>
+            <NavItems />
           </Navbar>
-        </header>
-      </Headroom>
+        </Headroom>
+      </header>
     );
   }
 }

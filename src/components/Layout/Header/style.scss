@@ -1,19 +1,19 @@
 @import '~styles/variables/all';
 
 .headroom {
+  background: #fff;
   z-index: $zindex-header !important;
 }
 
 .header {
-  padding: 0.75rem 0;
-  width: 100%;
-  height: 5rem;
   background: #fff;
   box-shadow: 0 3px 5px 0 rgba(7, 7, 7, 0.16);
 
   .container {
     display: flex;
     justify-content: space-between;
+
+    padding: 1rem 0;
 
     .logo {
       height: 2rem;
