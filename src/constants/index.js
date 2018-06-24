@@ -1,5 +1,5 @@
 import { GA_ID } from './constant';
 import { routes } from './routes';
-import tokens from './tokens';
+import { games, tokens } from './dgame';
 
-export { GA_ID, routes, tokens };
+export { GA_ID, routes, games, tokens };
