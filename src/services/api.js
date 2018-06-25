@@ -37,5 +37,5 @@ export const eosAPI = {
 
 export const transactionAPI = {
   load: id => request({ url: `/eos/transaction/${id}` }),
-  new: data => request.post({ url: '/eos/transaction', method: 'post', data })
+  new: data => request({ url: '/eos/transaction', method: 'post', data })
 };
