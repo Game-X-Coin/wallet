@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { observable } from 'mobx';
-import { inject, observer, action } from 'mobx-react';
+import { observable, action, runInAction } from 'mobx';
+import { inject, observer } from 'mobx-react';
 import { Form, Input, Button } from 'reactstrap';
 import qs from 'query-string';
 
@@ -13,7 +13,7 @@ import LogoBox from '@/components/LogoBox';
 
 import './style.scss';
 
-const { API_ROOT } = process.env;
+const { API_ENDPOINT } = process.env;
 
 @inject('authStore', 'userStore', 'commonStore')
 @observer
@@ -22,6 +22,7 @@ class AuthorizePage extends Component {
   @observable transactionId = '';
   @observable client = '';
 
+  @action
   async componentWillMount() {
     const { authStore, userStore } = this.props;
     const { pathname, search } = window.location;
@@ -36,7 +37,7 @@ class AuthorizePage extends Component {
     } else {
       const { transactionId, client } = await oauthAPI.getTransaction(params);
 
-      action(() => {
+      runInAction(() => {
         this.transactionId = transactionId;
         this.client = client.name;
         this.loading = false;
@@ -69,7 +70,7 @@ class AuthorizePage extends Component {
             </div>
           </div>
 
-          <Form method="post" action={`${API_ROOT}/oauth/authorize`}>
+          <Form method="post" action={`${API_ENDPOINT}/oauth/authorize`}>
             <Input
               type="hidden"
               name="transaction_id"
