@@ -1,4 +1,47 @@
+@import '~styles/variables/all';
+
 .home-page {
+  .transfer {
+    display: flex;
+    align-items: center;
+
+    @media screen and (max-width: $size-md) {
+      flex-direction: column;
+      align-items: initial;
+
+      .form-group {
+        margin: 0 0 1rem 0 !important;
+
+        label {
+          width: 3rem;
+          text-transform: capitalize;
+        }
+
+        input,
+        select {
+          flex: 1;
+        }
+      }
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+
+      margin: 0;
+      margin-right: 0.5rem;
+
+      label {
+        margin: 0;
+        margin-right: 0.5rem;
+      }
+
+      input {
+        width: 7rem;
+      }
+    }
+  }
+
   .balance {
     display: flex;
     align-items: center;
