@@ -3,9 +3,9 @@ import commonStore from '@/stores/commonStore';
 
 const { API_ENDPOINT } = process.env;
 
-const defaultHeaders = {
+const defaultHeaders = () => ({
   authorization: `Bearer ${commonStore.token}`
-};
+});
 
 const defaultOptions = {
   baseURL: API_ENDPOINT,
@@ -25,7 +25,7 @@ const request = options => {
           cancel = c;
         }),
         headers: {
-          ...defaultHeaders,
+          ...defaultHeaders(),
           ...options.headers
         }
       });
