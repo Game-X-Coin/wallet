@@ -1,0 +1,29 @@
+.dgame-page {
+  .game {
+    display: flex;
+
+    margin-bottom: 1.5rem;
+
+    .logo {
+      margin-right: 1.5rem;
+      width: 10rem;
+      height: 10rem;
+      background-color: gray;
+      background-size: cover;
+      border-radius: 5px;
+    }
+
+    .info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      flex: 1;
+    }
+
+    .howto {
+      span {
+        margin: 0 0.3rem;
+      }
+    }
+  }
+}
