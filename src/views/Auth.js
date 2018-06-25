@@ -7,28 +7,16 @@ import { inject, observer } from 'mobx-react';
 @inject('authStore', 'userStore')
 @observer
 class Auth extends Component {
-  constructor() {
-    super();
-    this.handleLogout = this.handleLogout.bind(this);
-  }
-
-  handleLogout() {
-    this.props.authStore
-      .logout()
-      .then(() => this.props.history.replace('/login'));
-  }
-
   render() {
     const {
       renderLoggedIn = () => null,
       renderLoggedOut = () => null,
-      userStore
+      userStore: { currentUser },
+      authStore: { logout }
     } = this.props;
 
-    const { currentUser } = userStore;
-
     return currentUser
-      ? renderLoggedIn(currentUser, this.handleLogout)
+      ? renderLoggedIn(currentUser, logout)
       : renderLoggedOut();
   }
 }

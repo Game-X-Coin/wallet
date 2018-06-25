@@ -4,6 +4,7 @@ export const routes = [
   {
     path: '/',
     exact: true,
+    isPrivate: true,
     component: asyncComponent(() => import('../pages/HomePage'))
   },
   {
@@ -14,6 +15,7 @@ export const routes = [
   {
     path: '/profile',
     exact: true,
+    isPrivate: true,
     component: asyncComponent(() => import('../pages/ProfilePage'))
   },
   {

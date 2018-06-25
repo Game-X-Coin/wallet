@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
-import { Switch, Route, withRouter } from 'react-router-dom';
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom';
 import { inject, observer } from 'mobx-react';
 import DevTools from 'mobx-react-devtools';
 
 import { routes } from './constants';
 import { Header, Body, Footer } from './components/Layout';
 import LoadingSpinner from './components/LoadingSpinner';
+import Auth from './views/Auth';
 
 @withRouter
 @inject('userStore', 'commonStore')
@@ -41,19 +42,29 @@ class App extends Component {
           key={index}
           exact={route.exact}
           path={route.path}
-          render={() =>
-            route.isFullscreen ? (
-              <route.component />
+          render={() => {
+            const RouteComp = () =>
+              route.isFullscreen ? (
+                <route.component />
+              ) : (
+                <React.Fragment>
+                  <Header />
+                  <Body>
+                    <route.component />
+                  </Body>
+                  <Footer />
+                </React.Fragment>
+              );
+
+            return route.isPrivate ? (
+              <Auth
+                renderLoggedIn={() => <RouteComp />}
+                renderLoggedOut={() => <Redirect to="/login" />}
+              />
             ) : (
-              <React.Fragment>
-                <Header />
-                <Body>
-                  <route.component />
-                </Body>
-                <Footer />
-              </React.Fragment>
-            )
-          }
+              <RouteComp />
+            );
+          }}
         />
       ));
 
