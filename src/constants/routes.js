@@ -7,6 +7,11 @@ export const routes = [
     component: asyncComponent(() => import('../pages/HomePage'))
   },
   {
+    path: '/@:account',
+    exact: true,
+    component: asyncComponent(() => import('../pages/HomePage'))
+  },
+  {
     path: '/dgame',
     exact: true,
     component: asyncComponent(() => import('../pages/DgamePage'))
