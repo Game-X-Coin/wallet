@@ -17,8 +17,8 @@ const Balances = ({ tokens }) => {
 
             <a href={token.game.url} target="_blank">
               <div
-                className="image"
-                style={{ backgroundImage: `url(${token.logo})` }}
+                className="logo"
+                style={{ backgroundImage: `url(${token.game.logo})` }}
               />
             </a>
           </div>

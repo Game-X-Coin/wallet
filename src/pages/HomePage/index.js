@@ -37,8 +37,8 @@ class HomePage extends Component {
 
     const hasAccountParam = this.props.match.params.account;
 
-    const tokenData = Object.keys(balances).map(key => ({
-      balance: balances[key],
+    const tokenData = Object.keys(tokens).map(key => ({
+      balance: balances[key] || '0.0000',
       ...tokens[key]
     }));
 

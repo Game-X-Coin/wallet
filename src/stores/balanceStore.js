@@ -3,10 +3,7 @@ import { eosAPI } from '@/services/api';
 
 export class BalanceStore {
   @observable isLoading = false;
-  @observable
-  balances = {
-    GXQ: '0.0000'
-  };
+  @observable balances = {};
 
   $req(account) {
     return eosAPI.balances(account);
