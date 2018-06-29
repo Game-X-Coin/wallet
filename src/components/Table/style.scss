@@ -1,0 +1,48 @@
+.r-table {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  &.striped .r-table-row:nth-of-type(2n) {
+    background-color: #f7f7f7;
+  }
+
+  &.hover .r-table-row:hover {
+    background-color: #f7f7f7;
+  }
+
+  &__title {
+    padding: 1rem 1.5rem;
+    font-size: 1.25rem;
+    border-bottom: 1px solid #e8e8e8;
+  }
+
+  &-head {
+    display: flex;
+
+    padding: 0.5rem 1.5rem;
+    border-bottom: 1px solid #e8e8e8;
+    color: #9e9e9e;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+  }
+
+  &-body {
+    flex: 1;
+
+    font-size: 0.9rem;
+    color: #434343;
+  }
+
+  &-row {
+    display: flex;
+    align-items: center;
+
+    padding: 0.3rem 1.5rem;
+  }
+
+  &__col {
+    flex: 1;
+  }
+}
