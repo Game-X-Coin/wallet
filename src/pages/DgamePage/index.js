@@ -12,7 +12,7 @@ class DgamePage extends Component {
 
     return (
       <div className="dgame-page">
-        <Page.Header image={GXCQuest.logo}>
+        <Page.Header image={GXCQuest.demo}>
           <h1 className="mb-3">{GXCQuest.name}</h1>
           <h5 className="font-weight-light">{GXCQuest.description}</h5>
         </Page.Header>
@@ -29,7 +29,7 @@ class DgamePage extends Component {
                   <div className="game">
                     <div
                       className="logo"
-                      style={{ backgroundImage: `url(${game.logo})` }}
+                      style={{ backgroundImage: `url(${game.demo})` }}
                     />
 
                     <div className="info">

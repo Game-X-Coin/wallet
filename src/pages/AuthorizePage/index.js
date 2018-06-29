@@ -60,7 +60,7 @@ class AuthorizePage extends Component {
           <div className="game position-relative mb-3">
             <div
               className="logo"
-              style={{ backgroundImage: `url(${game && game.logo})` }}
+              style={{ backgroundImage: `url(${game && game.demo})` }}
             />
             <div className="description">
               <a target="_blank" href={game && game.url}>
