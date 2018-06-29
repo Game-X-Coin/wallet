@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
 import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
@@ -7,6 +7,7 @@ import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 import { Fullscreen } from '@/components/Layout';
 import LogoBox from '@/components/LogoBox';
 
+@withRouter
 @inject('authStore')
 @observer
 class LoginPage extends Component {
@@ -37,7 +38,7 @@ class LoginPage extends Component {
     const { redirectParams } = this.props.authStore;
 
     return (
-      <Fullscreen>
+      <Fullscreen onClose={() => this.props.history.push('/')}>
         <LogoBox />
         <h3 className="mb-4 text-center">Login to GXC Wallet</h3>
 

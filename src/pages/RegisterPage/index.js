@@ -1,12 +1,13 @@
 import React from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import { observable } from 'mobx';
 import { inject, observer } from 'mobx-react';
-import { Link } from 'react-router-dom';
 import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 
 import { Fullscreen } from '@/components/Layout';
 import LogoBox from '@/components/LogoBox';
 
+@withRouter
 @inject('authStore')
 @observer
 class Register extends React.Component {
@@ -38,7 +39,7 @@ class Register extends React.Component {
     const { redirectParams } = this.props.authStore;
 
     return (
-      <Fullscreen>
+      <Fullscreen onClose={() => this.props.history.push('/')}>
         <LogoBox />
         <h3 className="mb-4 text-center">Register to GXC Wallet</h3>
 
