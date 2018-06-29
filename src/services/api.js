@@ -39,3 +39,8 @@ export const transactionAPI = {
   load: id => request({ url: `/eos/transaction/${id}` }),
   new: data => request({ url: '/eos/transaction', method: 'post', data })
 };
+
+export const dexAPI = {
+  getList: data => request({ url: '/dex/list', method: 'post', data }),
+  createOrder: data => request({ url: '/dex/order', method: 'post', data })
+};

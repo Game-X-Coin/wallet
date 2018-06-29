@@ -17,6 +17,10 @@ export const routes = [
     component: asyncComponent(() => import('../pages/DgamePage'))
   },
   {
+    path: '/dex',
+    component: asyncComponent(() => import('../pages/DexPage'))
+  },
+  {
     path: '/profile',
     exact: true,
     isPrivate: true,
@@ -39,5 +43,18 @@ export const routes = [
     exact: true,
     isFullscreen: true,
     component: asyncComponent(() => import('../pages/AuthorizePage'))
+  }
+];
+
+export const dexRoutes = [
+  {
+    path: '/dex',
+    exact: true,
+    component: asyncComponent(() => import('../pages/DexPage/TradeListPage'))
+  },
+  {
+    path: '/dex/:token',
+    exact: true,
+    component: asyncComponent(() => import('../pages/DexPage/TradeDetailPage'))
   }
 ];

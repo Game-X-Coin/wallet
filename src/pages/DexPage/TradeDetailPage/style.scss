@@ -1,0 +1,58 @@
+.trade-detail-page {
+  .token {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 1rem;
+
+    .logo {
+      margin-right: 1rem;
+      width: 3em;
+      height: 3rem;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+  }
+
+  .trade-chart {
+    position: relative;
+    height: 24rem;
+
+    .chart {
+      height: 100%;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    align-items: center;
+
+    position: relative;
+
+    label {
+      margin: 0;
+      width: 8rem;
+    }
+
+    .form-value {
+      padding: 0.375rem 0.75rem;
+      font-size: 1.15rem;
+      text-align: right;
+    }
+
+    .form-control {
+      margin-right: 0.5rem;
+    }
+
+    .form-value,
+    .form-control {
+      flex: 1;
+    }
+
+    .input-addon {
+      font-size: 0.9rem;
+      color: gray;
+    }
+  }
+}
