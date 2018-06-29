@@ -42,7 +42,7 @@ class Header extends Component {
         ))}
         <Auth
           renderLoggedIn={(user, logout) => (
-            <UncontrolledDropdown nav inNavbar>
+            <UncontrolledDropdown className="px-3" nav inNavbar>
               <DropdownToggle nav>{user.account}</DropdownToggle>
               <DropdownMenu>
                 <DropdownItem tag={Link} to="/">
@@ -56,7 +56,11 @@ class Header extends Component {
               </DropdownMenu>
             </UncontrolledDropdown>
           )}
-          renderLoggedOut={() => <NavItem to="/login">Login</NavItem>}
+          renderLoggedOut={() => (
+            <NavItem className="px-3" to="/login">
+              Login
+            </NavItem>
+          )}
         />
       </Nav>
     );
