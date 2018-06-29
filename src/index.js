@@ -13,7 +13,6 @@ import stores from './stores';
 import App from './App';
 
 import 'material-design-icons/iconfont/material-icons.css';
-import 'bootstrap/scss/bootstrap.scss';
 import './styles/main.scss';
 
 ReactGA.initialize(GA_ID);

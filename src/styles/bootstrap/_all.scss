@@ -1,2 +1,15 @@
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
+
+$theme-colors: (
+  primary: #0070be,
+  danger: #ff4b34
+);
+
+@import 'shadow';
+
+@import '~bootstrap/scss/bootstrap';
+
 @import 'table';
 @import 'dropdown';
+@import 'button';
